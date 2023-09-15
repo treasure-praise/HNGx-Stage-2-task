@@ -34,7 +34,7 @@ const updateUser = asyncHandler(async (req, res) => {
 //Delete User
 const deleteUser = asyncHandler(async (req, res) => {
   try {
-    const user = User.findByIdAndRemove(req.params.id);
+    const user = User.findByIdAndDelete(req.params.id);
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -44,6 +44,25 @@ const deleteUser = asyncHandler(async (req, res) => {
     res.status(204).json({
       success: true,
       message: "User successfully deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+});
+
+//Get a Single User
+const getSingleUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({
+      success: true,
+      user,
     });
   } catch (error) {
     res.status(500).json({
@@ -66,4 +85,10 @@ const getAllUsers = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createPerson, deleteUser, updateUser, getAllUsers };
+module.exports = {
+  createPerson,
+  deleteUser,
+  updateUser,
+  getAllUsers,
+  getSingleUser,
+};
