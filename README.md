@@ -133,6 +133,7 @@ PUT /users/:id: Update a user by ID.
 DELETE /users/:id: Delete a user by ID.
 
 UML Diagram
+```bash
 +---------------------+
 | User |
 +---------------------+
@@ -142,6 +143,7 @@ UML Diagram
 | + setName(name: String): void |
 | + save(): User |
 +---------------------+
+```
 
 User is the class representing the Mongoose model.
 
